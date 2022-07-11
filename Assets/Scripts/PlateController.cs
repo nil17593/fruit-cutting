@@ -7,13 +7,15 @@ public class PlateController : MonoBehaviour
 {
     //public Transform plateSelected;
     public Transform slicer;
-    public bool canSlice;
+    public static bool canSlice;
     public bool thisPlate;
-    public int i;
+    public int i = 4;
+    private GameObject slicingFruit;
     public static PlateController instance;
 
     private void Awake()
     {
+        i = 3;
         instance = this;
     }
 
@@ -34,22 +36,34 @@ public class PlateController : MonoBehaviour
 
     public void MoveFruitsToTheSlicer()
     {
-        Debug.Log(transform.childCount);
-        if (transform.childCount != 0 && thisPlate)
+        if (GameManager.Instance.fruitsToCut.Count >= 4)
         {
-            if (transform.GetChild(i).CompareTag("Fruit"))
-            {
-                transform.GetChild(i).DOMove(slicer.position, 2f);
-                i += 1;
-            }
-            //for (int i = 0; i < transform.childCount; i++)
-            //{
-            //    if (transform.GetChild(i).CompareTag("Fruit"))
-            //    {
-            //        Debug.Log(i);
-            //        transform.GetChild(i).gameObject.transform.DOMove(slicer.position, 2f);                   
-            //    }
-            //}
+            return;
         }
+        else
+        {
+            if (transform.childCount != 0 && thisPlate)
+            {
+
+                //if (transform.GetChild(i).CompareTag("Fruit"))
+                //{
+                Vector3 pos = new Vector3(Random.Range(slicer.GetComponent<Collider>().bounds.min.x, slicer.GetComponent<Collider>().bounds.max.x), slicer.transform.position.y,
+                Random.Range(slicer.GetComponent<Collider>().bounds.min.z, slicer.GetComponent<Collider>().bounds.max.z));
+                slicingFruit = transform.GetChild(i).gameObject;
+
+                slicingFruit.transform.DOMove(pos, 1f);
+                GameManager.Instance.fruitsToCut.Add(slicingFruit.gameObject);
+                slicingFruit.transform.parent = slicer;
+                //slicingFruit.AddComponent(typeof(FruitSlicer));
+                //slicingFruit.GetComponent<FruitSlicer>().SectionCount = 10;
+                Debug.Log("Childs= " + transform.childCount);
+                //transform.GetChild(i).
+                i -= 1;
+            }
+        }
+        //else
+        //{
+        //    return;
+        //}
     }
 }

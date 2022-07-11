@@ -453,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b47dae0b1c7224b9c46fc4e4333135, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetFruit: {fileID: 0}
+  TargetFruit: {fileID: 5134928301080979436}
   SectionCount: 10
   fruitCutPiece: {fileID: 1125202155953082, guid: 573bb482e4baeec4386587db7cc07515, type: 3}
   onlyOnce: 1
@@ -717,8 +717,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0000009536743, y: -3.524}
-  m_SizeDelta: {x: 75.174, y: 7.637}
+  m_AnchoredPosition: {x: 18.348, y: -3.524}
+  m_SizeDelta: {x: 82.707, y: 7.637}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &253882717
 MonoBehaviour:
@@ -2143,8 +2143,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.32887614, z: 1}
-  m_Center: {x: 0.0000021319204, y: -0.33555743, z: -1.2299943}
+  m_Size: {x: 1.1592045, y: 0.32887617, z: 1.462728}
+  m_Center: {x: -0.07959693, y: -0.33555594, z: -1.2725085}
 --- !u!1 &690907252
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,7 +2258,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slicer: {fileID: 1578684597}
-  canSlice: 0
   thisPlate: 0
   i: 0
 --- !u!1 &692373930
@@ -2785,7 +2784,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.21, y: 10.57}
+  m_AnchoredPosition: {x: 8.8, y: 10.57}
   m_SizeDelta: {x: 78.6124, y: 30.6634}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &880260664
@@ -3291,7 +3290,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slicer: {fileID: 1578684597}
-  canSlice: 0
   thisPlate: 0
   i: 0
 --- !u!1 &1215520964
@@ -3551,7 +3549,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slicer: {fileID: 1578684597}
-  canSlice: 0
   thisPlate: 0
   i: 0
 --- !u!1 &1294466907
@@ -3719,7 +3716,9 @@ MonoBehaviour:
   - {fileID: 690907252}
   - {fileID: 1836324279}
   slicerBlade: {fileID: 685071292}
+  plates: {fileID: 829703987}
   i: 0
+  fruitsToCut: []
 --- !u!4 &1325695933
 Transform:
   m_ObjectHideFlags: 0
@@ -4092,7 +4091,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404155165}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -43.9, y: 87.5, z: 105.6}
+  m_LocalPosition: {x: -59.1, y: 87.5, z: 105.6}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 1473682151}
@@ -4217,7 +4216,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slicer: {fileID: 1578684597}
-  canSlice: 0
   thisPlate: 0
   i: 0
 --- !u!1 &1534628727
@@ -4310,13 +4308,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578684596}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0.1128564, z: 0, w: 0.9936113}
   m_LocalPosition: {x: 0.02, y: 6.521, z: -0.308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 672293640}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 12.96, z: 0}
 --- !u!65 &1578684598
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4328,8 +4326,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.8718922, y: 0.30160332, z: 1.0542223}
-  m_Center: {x: -0.028854493, y: 0.022865295, z: 0.02711099}
+  m_Size: {x: 0.5499426, y: 0.11364132, z: 0.21051152}
+  m_Center: {x: -0.05629464, y: -0.06348853, z: -0.10046627}
 --- !u!1 &1609298889
 GameObject:
   m_ObjectHideFlags: 0
@@ -5442,7 +5440,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slicer: {fileID: 1578684597}
-  canSlice: 0
   thisPlate: 0
   i: 0
 --- !u!1 &1889591260
@@ -5653,7 +5650,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slicer: {fileID: 1578684597}
-  canSlice: 0
   thisPlate: 0
   i: 0
 --- !u!1 &1923742258
@@ -5889,6 +5885,30 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
       - m_Target: {fileID: 1110069411}
+        m_TargetAssemblyTypeName: PlateController, Assembly-CSharp
+        m_MethodName: MoveFruitsToTheSlicer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 690907257}
+        m_TargetAssemblyTypeName: PlateController, Assembly-CSharp
+        m_MethodName: MoveFruitsToTheSlicer
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1836324284}
         m_TargetAssemblyTypeName: PlateController, Assembly-CSharp
         m_MethodName: MoveFruitsToTheSlicer
         m_Mode: 1

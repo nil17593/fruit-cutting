@@ -30,8 +30,11 @@ public class GameManager : MonoBehaviour
     public GameObject Slicer;
     public GameObject [] plateControllers;
     public GameObject slicerBlade;
+    public RectTransform plates;
     public int i = 0;
 
+
+    public List<GameObject> fruitsToCut = new List<GameObject>();
     public static GameManager Instance;
 
 
@@ -41,10 +44,10 @@ public class GameManager : MonoBehaviour
         canHandleTouch = true;
         IceContainer.SetActive(false);
         //Slicer.SetActive(false);
-        foreach (GameObject plate in plateControllers)
-        {
-            plate.SetActive(false);
-        }
+        //foreach (GameObject plate in plateControllers)
+        //{
+        //    plate.SetActive(false);
+        //}
     }
 
     // Update is called once per frame
@@ -115,8 +118,13 @@ public class GameManager : MonoBehaviour
 
     public void CutFruits()
     {
-        if(presentGameState == GameState.Slicing)
-        slicerBlade.transform.DOLocalRotate(new Vector3(0, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
+        if (presentGameState == GameState.Slicing)
+        {
+            if (fruitsToCut.Count >= 3)
+            {
+                slicerBlade.transform.DOLocalRotate(new Vector3(0, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
+            }
+        }
     }
 
     public void EnableIceContainer()
@@ -124,18 +132,14 @@ public class GameManager : MonoBehaviour
         presentGameState = GameState.IceContainerSelection;
         IceContainer.SetActive(true);
         onlyOnce = false;
-        StartCoroutine(EnablePlates());
+        EnablePlates();
         //IceContainerImage.gameObject.SetActive(false);
         //StartCoroutine(NextStep("Slicing"));
     }
 
-    IEnumerator EnablePlates()
+    void EnablePlates()
     {
-        yield return new WaitForSeconds(0.5f);
-        foreach (GameObject plate in plateControllers)
-        {
-            plate.SetActive(true);
-        }
+        plates.DOAnchorPos(new Vector3(-1.21f, 10.57f, -4.28f),2f);
     }
 
     public IEnumerator NextStep(string name)

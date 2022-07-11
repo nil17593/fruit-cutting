@@ -8,6 +8,8 @@ public class PlateController : MonoBehaviour
     //public Transform plateSelected;
     public Transform slicer;
     public bool canSlice;
+    public bool thisPlate;
+    public int i;
     public static PlateController instance;
 
     private void Awake()
@@ -33,16 +35,21 @@ public class PlateController : MonoBehaviour
     public void MoveFruitsToTheSlicer()
     {
         Debug.Log(transform.childCount);
-        if (transform.childCount != 0)
+        if (transform.childCount != 0 && thisPlate)
         {
-            for (int i = 0; i < transform.childCount; i++)
+            if (transform.GetChild(i).CompareTag("Fruit"))
             {
-                if (transform.GetChild(i).CompareTag("Fruit"))
-                {
-                    Debug.Log(i);
-                    transform.GetChild(i).gameObject.transform.DOMove(slicer.position, 2f);                   
-                }
+                transform.GetChild(i).DOMove(slicer.position, 2f);
+                i += 1;
             }
+            //for (int i = 0; i < transform.childCount; i++)
+            //{
+            //    if (transform.GetChild(i).CompareTag("Fruit"))
+            //    {
+            //        Debug.Log(i);
+            //        transform.GetChild(i).gameObject.transform.DOMove(slicer.position, 2f);                   
+            //    }
+            //}
         }
     }
 }

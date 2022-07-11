@@ -6,6 +6,7 @@ public class ObjectClicker : MonoBehaviour
 {
     public bool selected;
     private GameObject selectedPlate;
+    public List<GameObject> plates = new List<GameObject>();
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0))
@@ -25,13 +26,14 @@ public class ObjectClicker : MonoBehaviour
                     {
                         Debug.Log("NOT");
                         selected = true;
+                        hit.transform.gameObject.GetComponent<PlateController>().thisPlate=true;
                         selectedPlate = hit.transform.gameObject;
                         selectedPlate.transform.position = selectedPlate.transform.position + new Vector3(0, 0.5f, 0);
                     }
                     else if (selected)
                     {
                         Debug.Log("YES");
-
+                        selectedPlate.transform.gameObject.GetComponent<PlateController>().thisPlate = false;
                         selected = false;
                         selectedPlate.transform.position = selectedPlate.transform.position + new Vector3(0, -0.5f, 0);
                     }

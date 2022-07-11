@@ -14,10 +14,9 @@ public class ObjectClicker : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, 100.0f))
             {
-                if (hit.transform != null)
+                if (hit.transform.gameObject.CompareTag("Plate"))
                 {
-
-                    if (hit.transform.gameObject.CompareTag("Plate") && !selected)
+                    if (!selected)
                     {
                         selected = true;
                         hit.transform.position = hit.transform.position + new Vector3(0, 0.5f, 0);

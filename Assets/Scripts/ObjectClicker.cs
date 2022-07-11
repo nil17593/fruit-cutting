@@ -5,10 +5,15 @@ using UnityEngine;
 public class ObjectClicker : MonoBehaviour
 {
     public bool selected;
+    private GameObject selectedPlate;
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (!Input.GetMouseButtonDown(0))
         {
+            return;
+        }
+        else 
+        { 
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -18,13 +23,17 @@ public class ObjectClicker : MonoBehaviour
                 {
                     if (!selected)
                     {
+                        Debug.Log("NOT");
                         selected = true;
-                        hit.transform.position = hit.transform.position + new Vector3(0, 0.5f, 0);
+                        selectedPlate = hit.transform.gameObject;
+                        selectedPlate.transform.position = selectedPlate.transform.position + new Vector3(0, 0.5f, 0);
                     }
                     else if (selected)
                     {
+                        Debug.Log("YES");
+
                         selected = false;
-                        hit.transform.position = hit.transform.position + new Vector3(0, -0.5f, 0);
+                        selectedPlate.transform.position = selectedPlate.transform.position + new Vector3(0, -0.5f, 0);
                     }
                 }
             }

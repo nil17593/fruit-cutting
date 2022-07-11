@@ -124,12 +124,18 @@ public class GameManager : MonoBehaviour
         presentGameState = GameState.IceContainerSelection;
         IceContainer.SetActive(true);
         onlyOnce = false;
-        foreach(GameObject plate in plateControllers)
+        StartCoroutine(EnablePlates());
+        //IceContainerImage.gameObject.SetActive(false);
+        //StartCoroutine(NextStep("Slicing"));
+    }
+
+    IEnumerator EnablePlates()
+    {
+        yield return new WaitForSeconds(0.5f);
+        foreach (GameObject plate in plateControllers)
         {
             plate.SetActive(true);
         }
-        //IceContainerImage.gameObject.SetActive(false);
-        //StartCoroutine(NextStep("Slicing"));
     }
 
     public IEnumerator NextStep(string name)

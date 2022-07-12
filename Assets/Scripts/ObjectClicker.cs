@@ -36,6 +36,11 @@ public class ObjectClicker : MonoBehaviour
                         selectedPlate.transform.position = selectedPlate.transform.position + new Vector3(0, -0.5f, 0);
                     }
                 }
+                if (hit.transform.gameObject.CompareTag("BottleCap"))
+                {
+                        //GameManager.Instance.presentGameState = GameManager.GameState.Pour;
+                        GameManager.Instance.bottleSleceted = true;
+                }
             }
         }
     }

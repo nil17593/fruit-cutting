@@ -8,6 +8,7 @@ TagManager:
   - Plate
   - Fruit
   - Slicer
+  - BottleCap
   layers:
   - Default
   - TransparentFX

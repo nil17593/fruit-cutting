@@ -12,7 +12,7 @@ public class FruitSlicer : MonoBehaviour
     private Vector3 SizeOfOriginalCube;
     private Vector3 SectionSize;
     private Vector3 FillStartPosition;
-    private Transform ParentTransform;
+    public Transform ParentTransform;
     private GameObject SubCube;
     public bool onlyOnce = true;
 
@@ -35,7 +35,7 @@ public class FruitSlicer : MonoBehaviour
         FillStartPosition = TargetFruit.transform.TransformPoint(new Vector3(-0.5f, 0.5f, -0.5f))
                           + TargetFruit.transform.TransformDirection(new Vector3(SectionSize.x, -SectionSize.y, SectionSize.z) / 2.0f);
 
-        ParentTransform = new GameObject(TargetFruit.name + "CubeParent").transform;
+        //ParentTransform = new GameObject(TargetFruit.name + "CubeParent").transform;
     }
 
   
@@ -68,12 +68,14 @@ public class FruitSlicer : MonoBehaviour
         TargetFruit.SetActive(false);
 
 
-        foreach (Transform subCuboid in ParentTransform)
+        foreach (Transform piece in ParentTransform)
         {
-            subCuboid.gameObject.AddComponent<Rigidbody>();
-            subCuboid.gameObject.tag = "Piece";
+            piece.gameObject.AddComponent<Rigidbody>();
+            piece.gameObject.tag = "Piece";
+            GameManager.Instance.fruitPieces.Add(piece.gameObject);
             //subCuboid.gameObject.GetComponent<Rigidbody>().freezeRotation = true;// = Vector3.zero;
             //subCuboid.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+
         }
     }
 

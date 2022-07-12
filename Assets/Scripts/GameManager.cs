@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    public enum GameState { None, IceContainerSelection, Slicing, Pour, };//34.1 for steaming
+    public enum GameState {IceContainerSelection, Slicing, Pour, };//34.1 for steaming
     [Header("ENUM")]
     public GameState presentGameState;
 
@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     public bool canProgress;
     public bool onlyOnce;
     public bool canHandleTouch;
+    public bool bottleSleceted;
 
     //public int multiplyVal;
 
@@ -31,10 +32,13 @@ public class GameManager : MonoBehaviour
     public GameObject [] plateControllers;
     public GameObject slicerBlade;
     public RectTransform plates;
+    public GameObject BottleCap;
+    public GameObject spoon;
     //public int i = 0;
 
 
     public List<GameObject> fruitsToCut = new List<GameObject>();
+    public List<GameObject> fruitPieces = new List<GameObject>();
     public static GameManager Instance;
 
 
@@ -43,6 +47,7 @@ public class GameManager : MonoBehaviour
         Instance = this;
         canHandleTouch = true;
         IceContainer.SetActive(false);
+        spoon.SetActive(false);
         //Slicer.SetActive(false);
         //foreach (GameObject plate in plateControllers)
         //{
@@ -79,11 +84,11 @@ public class GameManager : MonoBehaviour
                     {
                         StartCoroutine(NextStep("Slicing"));
                     }
-                    //else if (presentGameState == GameState.Pour)
-                    //{
-                    //    StartCoroutine(NextStep("Dipping"));
+                    else if (presentGameState == GameState.Slicing)
+                    {
+                        //StartCoroutine(NextStep("Pour"));
 
-                    //}
+                    }
                     //else if (presentGameState == GameState.Dipping)
                     //{
                     //    StartCoroutine(NextStep("Steaming"));
@@ -118,16 +123,35 @@ public class GameManager : MonoBehaviour
 
     public void CutFruits()
     {
-        if (presentGameState == GameState.Slicing)
+        if (fruitsToCut.Count >= 4)
         {
-            if (fruitsToCut.Count >= 4)
-            {
-                slicerBlade.transform.DOLocalRotate(new Vector3(0, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
-                fruitsToCut.Clear();
-                StartCoroutine(SliceFruitsCoroutine());
-               
-            }
+            slicerBlade.transform.DOLocalRotate(new Vector3(0, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
+            fruitsToCut.Clear();
+            StartCoroutine(SliceFruitsCoroutine());
+            StartCoroutine(NextStep("Pour"));
         }
+    }
+
+    public void Pouring()
+    {
+        if (presentGameState == GameState.Pour)
+        {
+            Slicer.transform.DOLocalMove(new Vector3(-6f, 2.2f, 0f), 3f).OnComplete(() =>
+            {
+                IceContainer.transform.DOLocalMove(new Vector3(0f, 11.65f, -1.5f), 2f);
+
+            });
+            //spoon.SetActive(true);
+
+            //BottleCap.transform.DOLocalRotate(new Vector3(0, 0, 90f), 1f);
+            //foreach (GameObject piece in fruitPieces)
+            //{
+            //    Vector3 pos = new Vector3(Random.Range(spoon.GetComponent<Collider>().bounds.min.x, spoon.GetComponent<Collider>().bounds.max.x), spoon.transform.position.y,
+            //        Random.Range(spoon.GetComponent<Collider>().bounds.min.z, spoon.GetComponent<Collider>().bounds.max.z));
+            //    piece.transform.position = pos;
+            //}
+        }
+            
     }
 
     IEnumerator SliceFruitsCoroutine()
@@ -140,7 +164,6 @@ public class GameManager : MonoBehaviour
     {
         presentGameState = GameState.IceContainerSelection;
         IceContainer.SetActive(true);
-        onlyOnce = false;
         EnablePlates();
         //IceContainerImage.gameObject.SetActive(false);
         //StartCoroutine(NextStep("Slicing"));
@@ -154,7 +177,7 @@ public class GameManager : MonoBehaviour
     public IEnumerator NextStep(string name)
     {
         canHandleTouch = false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         GameStateSelection(name);
     }
 
@@ -168,10 +191,14 @@ public class GameManager : MonoBehaviour
             case "Slicing":
                 presentGameState = GameState.Slicing;
                 onlyOnce = false;
-                Slicer.SetActive(true);
-                //plateControllers[i].gameObject.SetActive(true);
                 StartCoroutine(Enable_Touch(3));
-                //i += 1;
+                break;
+            case "Pour":
+                presentGameState = GameState.Pour;
+                Pouring();
+                //Camera.main.transform.DOLocalMove(new Vector3(2.12f, 15f, -2.80f), 2).        
+                onlyOnce = false;
+                StartCoroutine(Enable_Touch(3));
                 break;
         }
     }

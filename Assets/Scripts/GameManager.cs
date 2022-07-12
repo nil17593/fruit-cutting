@@ -126,7 +126,11 @@ public class GameManager : MonoBehaviour
         if (fruitsToCut.Count >= 4)
         {
             slicerBlade.transform.DOLocalRotate(new Vector3(0, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
-            fruitsToCut.Clear();
+            foreach (GameObject fruit in fruitsToCut)
+            {
+                Destroy(fruit);
+            }
+            fruitsToCut.Clear();        
             StartCoroutine(SliceFruitsCoroutine());
             StartCoroutine(NextStep("Pour"));
         }
@@ -136,10 +140,10 @@ public class GameManager : MonoBehaviour
     {
         if (presentGameState == GameState.Pour)
         {
-            Slicer.transform.DOLocalMove(new Vector3(-6f, 2.2f, 0f), 3f).OnComplete(() =>
+            Slicer.transform.DOLocalMove(new Vector3(-6f, 2.2f, 0f), 2f).OnComplete(() =>
             {
+                plates.DOAnchorPos(new Vector3(8.8f, 10.57f, -4.28f), 2f);
                 IceContainer.transform.DOLocalMove(new Vector3(0f, 11.65f, -1.5f), 2f);
-
             });
             //spoon.SetActive(true);
 

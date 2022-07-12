@@ -16,8 +16,11 @@ public class FruitSlicer : MonoBehaviour
     private GameObject SubCube;
     public bool onlyOnce = true;
 
+    public static FruitSlicer instance;
+
     void Start()
     {
+        instance = this;
         onlyOnce = true;
         if (TargetFruit == null)
             TargetFruit = gameObject;
@@ -35,32 +38,30 @@ public class FruitSlicer : MonoBehaviour
         ParentTransform = new GameObject(TargetFruit.name + "CubeParent").transform;
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Slicer"))
-        {
-            if (!onlyOnce)
-            {
-                return;
-            }
-            else
-            {
-                InstantIntoCuboids();
-            }
-        }
-    }
+  
 
-    void InstantIntoCuboids()
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Slicer"))
+    //    {
+    //      
+    //    }
+    //}
+
+    public void CutFruits()
     {
-        for (int i = 0; i < SectionCount; i++)
+        if (onlyOnce)
         {
-            pos = new Vector3(Random.Range(TargetFruit.GetComponent<Collider>().bounds.min.x, TargetFruit.GetComponent<Collider>().bounds.max.x), TargetFruit.transform.position.y,
-                Random.Range(TargetFruit.GetComponent<Collider>().bounds.min.z, TargetFruit.GetComponent<Collider>().bounds.max.z));
-            SubCube = GameObject.Instantiate(fruitCutPiece) as GameObject;
-            SubCube.transform.localScale = SectionSize;
-            SubCube.transform.position = pos;
-            SubCube.transform.rotation = TargetFruit.transform.rotation;
-            SubCube.transform.SetParent(ParentTransform);
+            for (int i = 0; i < SectionCount; i++)
+            {
+                pos = new Vector3(Random.Range(TargetFruit.GetComponent<Collider>().bounds.min.x, TargetFruit.GetComponent<Collider>().bounds.max.x), TargetFruit.transform.position.y,
+                    Random.Range(TargetFruit.GetComponent<Collider>().bounds.min.z, TargetFruit.GetComponent<Collider>().bounds.max.z));
+                SubCube = GameObject.Instantiate(fruitCutPiece) as GameObject;
+                SubCube.transform.localScale = SectionSize;
+                SubCube.transform.position = pos;
+                SubCube.transform.rotation = TargetFruit.transform.rotation;
+                SubCube.transform.SetParent(ParentTransform);
+            }
         }
         onlyOnce = false;
         //Destroy(TargetFruit);

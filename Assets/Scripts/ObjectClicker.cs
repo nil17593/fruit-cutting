@@ -24,7 +24,6 @@ public class ObjectClicker : MonoBehaviour
                 {
                     if (!selected)
                     {
-                        Debug.Log("NOT");
                         selected = true;
                         hit.transform.gameObject.GetComponent<PlateController>().thisPlate=true;
                         selectedPlate = hit.transform.gameObject;
@@ -32,7 +31,6 @@ public class ObjectClicker : MonoBehaviour
                     }
                     else if (selected)
                     {
-                        Debug.Log("YES");
                         selectedPlate.transform.gameObject.GetComponent<PlateController>().thisPlate = false;
                         selected = false;
                         selectedPlate.transform.position = selectedPlate.transform.position + new Vector3(0, -0.5f, 0);

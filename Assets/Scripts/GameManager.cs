@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     public GameObject [] plateControllers;
     public GameObject slicerBlade;
     public RectTransform plates;
-    public int i = 0;
+    //public int i = 0;
 
 
     public List<GameObject> fruitsToCut = new List<GameObject>();
@@ -120,11 +120,20 @@ public class GameManager : MonoBehaviour
     {
         if (presentGameState == GameState.Slicing)
         {
-            if (fruitsToCut.Count >= 3)
+            if (fruitsToCut.Count >= 4)
             {
                 slicerBlade.transform.DOLocalRotate(new Vector3(0, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
+                fruitsToCut.Clear();
+                StartCoroutine(SliceFruitsCoroutine());
+               
             }
         }
+    }
+
+    IEnumerator SliceFruitsCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        FruitSlicer.instance.CutFruits();
     }
 
     public void EnableIceContainer()
@@ -160,9 +169,9 @@ public class GameManager : MonoBehaviour
                 presentGameState = GameState.Slicing;
                 onlyOnce = false;
                 Slicer.SetActive(true);
-                plateControllers[i].gameObject.SetActive(true);
+                //plateControllers[i].gameObject.SetActive(true);
                 StartCoroutine(Enable_Touch(3));
-                i += 1;
+                //i += 1;
                 break;
         }
     }

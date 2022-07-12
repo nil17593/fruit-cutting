@@ -56,7 +56,6 @@ public class PlateController : MonoBehaviour
                 slicingFruit.transform.parent = slicer;
                 //slicingFruit.AddComponent(typeof(FruitSlicer));
                 //slicingFruit.GetComponent<FruitSlicer>().SectionCount = 10;
-                Debug.Log("Childs= " + transform.childCount);
                 //transform.GetChild(i).
                 i -= 1;
             }

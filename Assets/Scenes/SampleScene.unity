@@ -420,7 +420,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84663286}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.35, y: 11.69, z: -0.55}
+  m_LocalPosition: {x: 0.35, y: 11.01, z: -0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8328879720617773822}
@@ -3725,6 +3725,7 @@ MonoBehaviour:
   spoon: {fileID: 3373176188008794392}
   fruitsToCut: []
   fruitPieces: []
+  count: 0
 --- !u!4 &1325695933
 Transform:
   m_ObjectHideFlags: 0
@@ -5800,6 +5801,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923742258}
   m_CullTransparentMesh: 1
+--- !u!1 &1966098414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1966098415}
+  m_Layer: 0
+  m_Name: FruitSlicingTransform
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1966098415
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1966098414}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.35, y: 11.01, z: -0.55}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2008868091
 GameObject:
   m_ObjectHideFlags: 0
@@ -7478,11 +7509,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8331601938968253804}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3523402, y: 1.1797631, z: 1.0953828}
-  m_Center: {x: -0.06364071, y: 0.25464803, z: -0.032296482}
+  m_Size: {x: 1.3523402, y: 0.9818534, z: 1.0953828}
+  m_Center: {x: -0.06364071, y: 0.15569323, z: -0.032296486}
 --- !u!33 &6576920765418942571
 MeshFilter:
   m_ObjectHideFlags: 0

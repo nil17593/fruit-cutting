@@ -39,23 +39,20 @@ public class GameManager : MonoBehaviour
 
     public List<GameObject> fruitsToCut = new List<GameObject>();
     public List<GameObject> fruitPieces = new List<GameObject>();
+    public int count = 0;
     public static GameManager Instance;
 
 
     void Start()
     {
+        count = 0;
         Instance = this;
         canHandleTouch = true;
         IceContainer.SetActive(false);
         spoon.SetActive(false);
         //Slicer.SetActive(false);
-        //foreach (GameObject plate in plateControllers)
-        //{
-        //    plate.SetActive(false);
-        //}
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (canProgress)
@@ -89,19 +86,6 @@ public class GameManager : MonoBehaviour
                         //StartCoroutine(NextStep("Pour"));
 
                     }
-                    //else if (presentGameState == GameState.Dipping)
-                    //{
-                    //    StartCoroutine(NextStep("Steaming"));
-
-                    //}
-                    //else if (presentGameState == GameState.Steaming)
-                    //{
-                    //    StartCoroutine(NextStep("End"));
-                    //}
-                    //else
-                    //{
-
-                    //}
                 }
                 canProgress = false;
             }
@@ -121,10 +105,12 @@ public class GameManager : MonoBehaviour
 
     }
 
+    //Swipemanager Swipe UP Event
     public void CutFruits()
     {
         if (fruitsToCut.Count >= 4)
         {
+            count += 1;
             slicerBlade.transform.DOLocalRotate(new Vector3(0, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
             foreach (GameObject fruit in fruitsToCut)
             {
@@ -132,9 +118,25 @@ public class GameManager : MonoBehaviour
             }
             fruitsToCut.Clear();        
             StartCoroutine(SliceFruitsCoroutine());
-            StartCoroutine(NextStep("Pour"));
+            StartCoroutine(OpenSlicer());
+
+            if (count == plates.GetComponentsInChildren<PlateController>().Length)
+            {
+                StartCoroutine(NextStep("Pour"));
+            }
         }
     }
+
+    public IEnumerator OpenSlicer()
+    {
+        if (fruitsToCut.Count <= 0)
+        {
+            yield return new WaitForSeconds(2f);
+            slicerBlade.transform.DOLocalRotate(new Vector3(27.3f, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
+            FruitSlicer.instance.onlyOnce = true;
+        }
+    }
+
 
     public void Pouring()
     {

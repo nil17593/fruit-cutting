@@ -58,6 +58,9 @@ public class FruitSlicer : MonoBehaviour
                     Random.Range(TargetFruit.GetComponent<Collider>().bounds.min.z, TargetFruit.GetComponent<Collider>().bounds.max.z));
                 SubCube = GameObject.Instantiate(fruitCutPiece) as GameObject;
                 SubCube.transform.localScale = SectionSize;
+                SubCube.gameObject.AddComponent<Rigidbody>();
+                SubCube.gameObject.tag = "Piece";
+                GameManager.Instance.fruitPieces.Add(SubCube);
                 SubCube.transform.position = pos;
                 SubCube.transform.rotation = TargetFruit.transform.rotation;
                 SubCube.transform.SetParent(ParentTransform);
@@ -65,18 +68,26 @@ public class FruitSlicer : MonoBehaviour
         }
         onlyOnce = false;
         //Destroy(TargetFruit);
-        TargetFruit.SetActive(false);
+        //TargetFruit.SetActive(false);
 
 
-        foreach (Transform piece in ParentTransform)
-        {
-            piece.gameObject.AddComponent<Rigidbody>();
-            piece.gameObject.tag = "Piece";
-            GameManager.Instance.fruitPieces.Add(piece.gameObject);
-            //subCuboid.gameObject.GetComponent<Rigidbody>().freezeRotation = true;// = Vector3.zero;
-            //subCuboid.gameObject.GetComponent<Rigidbody>().isKinematic = true;
+        //foreach (Transform piece in ParentTransform)
+        //{
+            
+        //    piece.gameObject.tag = "Piece";
+        //    GameManager.Instance.fruitPieces.Add(piece.gameObject);
+        //    if (piece.GetComponent<Rigidbody>() != null)
+        //    {
+        //        return;
+        //    }
+        //    else
+        //    {
+        //        piece.gameObject.AddComponent<Rigidbody>();
+        //    }
+        //    //subCuboid.gameObject.GetComponent<Rigidbody>().freezeRotation = true;// = Vector3.zero;
+        //    //subCuboid.gameObject.GetComponent<Rigidbody>().isKinematic = true;
 
-        }
+        //}
     }
 
     IEnumerator FrrezRotation(GameObject go)

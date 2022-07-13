@@ -6,6 +6,7 @@ using DG.Tweening;
 public class PlateController : MonoBehaviour
 {
     public Transform slicer;
+    public bool canDragFruits = true;
     public static bool canSlice;
     public bool thisPlate;
     public int i;// = 4;
@@ -14,6 +15,7 @@ public class PlateController : MonoBehaviour
 
     private void Awake()
     {
+        canDragFruits = true;
         i = transform.childCount - 1;
         instance = this;
     }
@@ -22,11 +24,12 @@ public class PlateController : MonoBehaviour
     {
         if (GameManager.Instance.fruitsToCut.Count >= 4)
         {
+
             return;
         }
         else
         {
-            if (transform.childCount != 0 && thisPlate)
+            if (transform.childCount != 0 && thisPlate && GameManager.Instance.candragFruits)
             {
                 Vector3 pos = new Vector3(Random.Range(slicer.GetComponent<Collider>().bounds.min.x, slicer.GetComponent<Collider>().bounds.max.x), slicer.transform.position.y,
                 Random.Range(slicer.GetComponent<Collider>().bounds.min.z, slicer.GetComponent<Collider>().bounds.max.z));

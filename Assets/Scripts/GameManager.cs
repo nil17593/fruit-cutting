@@ -6,7 +6,7 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    public enum GameState { IceContainerSelection, Slicing, Pour, };//34.1 for steaming
+    public enum GameState { IceContainerSelection, Slicing, Pour, };
     [Header("ENUM")]
     public GameState presentGameState;
 
@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
     public bool canHandleTouch;
     public bool bottleSleceted;
     public bool canPour;
-    //public int multiplyVal;
+    public bool candragFruits;
 
     [Header("GAMEOBJECTS")]
     public GameObject IceContainer;
@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        candragFruits = true;
         count = 0;
         Instance = this;
         canHandleTouch = true;
@@ -59,41 +60,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //if (canProgress)
-        //{
-        //    if (presentGameState == GameState.IceContainerSelection)
-        //    {
-
-        //    }
-
-        //    if (presentGameState == GameState.Slicing)
-        //    {
-
-        //    }
-
-        //    if (presentGameState == GameState.Pour)
-        //    {
-
-        //    }
-
-        //    else
-        //    {
-        //        if (!onlyOnce)
-        //        {
-        //            onlyOnce = true;
-        //            if (presentGameState == GameState.IceContainerSelection)
-        //            {
-        //                StartCoroutine(NextStep("Slicing"));
-        //            }
-        //            else if (presentGameState == GameState.Slicing)
-        //            {
-        //                //StartCoroutine(NextStep("Pour"));
-
-        //            }
-        //        }
-        //        canProgress = false;
-        //    }
-        //}
+        if (canProgress)
+        {
+                
+        }
 
         //if (canHandleTouch)
         //{
@@ -119,9 +89,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    //Swipemanager Swipe UP Event
+    //Swipemanager Swipe Down Event
     public void CutFruits()
     {
+        candragFruits = false;
         if (fruitsToCut.Count >= 4)
         {
             count += 1;
@@ -147,8 +118,14 @@ public class GameManager : MonoBehaviour
         if (fruitsToCut.Count <= 0)
         {
             yield return new WaitForSeconds(2f);
-            slicerBlade.transform.DOLocalRotate(new Vector3(27.3f, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
-            FruitSlicer.instance.onlyOnce = true;
+            slicerBlade.transform.DOLocalRotate(new Vector3(27.3f, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f).OnComplete(() =>
+            {
+                FruitSlicer.instance.onlyOnce = true;
+                candragFruits = true;
+            }
+            );
+            
+
         }
     }
 

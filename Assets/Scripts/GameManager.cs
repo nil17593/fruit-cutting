@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool bottleSleceted;
     public bool canPour;
     public bool candragFruits;
+    public bool selectPlates;
 
     [Header("GAMEOBJECTS")]
     public GameObject IceContainer;
@@ -33,29 +34,32 @@ public class GameManager : MonoBehaviour
     public RectTransform plates;
     public GameObject BottleCap;
     public Transform fruitPiecesTransformBottle;
-    public GameObject spoon;
     public GameObject plateOfPieces;
     public Transform pieceParentTransform;
     //public int i = 0;
 
-
+    [Header("LISTS for Sliced Fruits")]
     public List<GameObject> fruitsToCut = new List<GameObject>();
     public List<GameObject> fruitPieces = new List<GameObject>();
     public List<GameObject> piecesInBottle = new List<GameObject>();
+
+    [Header("COUNTS")]
     public int count = 0;
     public int piecesCount;
+
+
     public static GameManager Instance;
 
 
     void Start()
     {
+        selectPlates = false;
         candragFruits = true;
         count = 0;
         Instance = this;
         canHandleTouch = true;
         canPour = false;
         IceContainer.SetActive(false);
-        spoon.SetActive(false);
     }
 
     void Update()
@@ -189,7 +193,10 @@ public class GameManager : MonoBehaviour
 
     void EnablePlates()
     {
-        plates.DOAnchorPos(new Vector3(-1.21f, 10.57f, -4.28f), 2f);
+        plates.DOAnchorPos(new Vector3(-1.21f, 10.57f, -4.28f), 2f).OnComplete(() =>
+        {
+            selectPlates = true;
+        });
     }
 
     public IEnumerator NextStep(string name)

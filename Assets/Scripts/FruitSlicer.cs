@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class FruitSlicer : MonoBehaviour
 {
+    [Header("Target Fruit")]
+    [Tooltip("Drag Here Fruit which will be sliced")]
     public GameObject TargetFruit;
-
+    [Tooltip("how many pieces to create")]
     public int SectionCount;
+    [Tooltip("Drag here piece of fruit")]
     public GameObject fruitCutPiece;
+    [Tooltip("In slicer GameObject FruitsPosition")]
+    public Transform ParentTransform;
+
+    public bool onlyOnce = true;
+
     private Vector3 pos;
     private Vector3 SizeOfOriginalCube;
     private Vector3 SectionSize;
     private Vector3 FillStartPosition;
-    public Transform ParentTransform;
+    
     private GameObject SubCube;
-    public bool onlyOnce = true;
+    
 
     public static FruitSlicer instance;
 
@@ -35,18 +43,9 @@ public class FruitSlicer : MonoBehaviour
         FillStartPosition = TargetFruit.transform.TransformPoint(new Vector3(-0.5f, 0.5f, -0.5f))
                           + TargetFruit.transform.TransformDirection(new Vector3(SectionSize.x, -SectionSize.y, SectionSize.z) / 2.0f);
 
-        //ParentTransform = new GameObject(TargetFruit.name + "CubeParent").transform;
     }
 
   
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Slicer"))
-    //    {
-    //      
-    //    }
-    //}
 
     public void CutFruits()
     {

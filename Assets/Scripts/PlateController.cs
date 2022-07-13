@@ -8,13 +8,13 @@ public class PlateController : MonoBehaviour
     public Transform slicer;
     public static bool canSlice;
     public bool thisPlate;
-    public int i = 4;
+    public int i;// = 4;
     private GameObject slicingFruit;
     public static PlateController instance;
 
     private void Awake()
     {
-        i = 3;
+        i = transform.childCount - 1;
         instance = this;
     }
 

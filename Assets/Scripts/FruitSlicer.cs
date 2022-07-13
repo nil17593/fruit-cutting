@@ -27,9 +27,9 @@ public class FruitSlicer : MonoBehaviour
 
         SizeOfOriginalCube = TargetFruit.transform.lossyScale;
         SectionSize = new Vector3(
-            SizeOfOriginalCube.x / SectionCount + 0.1f,
-            SizeOfOriginalCube.y / SectionCount + 0.1f,
-            SizeOfOriginalCube.z / SectionCount + 0.1f
+            SizeOfOriginalCube.x / SectionCount,
+            SizeOfOriginalCube.y / SectionCount,
+            SizeOfOriginalCube.z / SectionCount
             );
 
         FillStartPosition = TargetFruit.transform.TransformPoint(new Vector3(-0.5f, 0.5f, -0.5f))

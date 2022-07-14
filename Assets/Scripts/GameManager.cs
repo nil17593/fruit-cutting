@@ -10,12 +10,10 @@ public class GameManager : MonoBehaviour
     [Header("ENUM")]
     public GameState presentGameState;
 
-
     //[Header("FILLBAR SETTINGS")]
     //public Image ProgressFillingBar;
     //public float TimeforProgress;
     //[Header("Image")]
-
 
     [Header("BOOLS")]
     public bool canProgress;
@@ -119,7 +117,7 @@ public class GameManager : MonoBehaviour
 
     public IEnumerator OpenSlicer()
     {
-        if (fruitsToCut.Count <= 0)
+        if (fruitsToCut.Count <= 0 && count != plates.GetComponentsInChildren<PlateController>().Length)
         {
             yield return new WaitForSeconds(2f);
             slicerBlade.transform.DOLocalRotate(new Vector3(27.3f, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f).OnComplete(() =>
@@ -128,11 +126,8 @@ public class GameManager : MonoBehaviour
                 candragFruits = true;
             }
             );
-            
-
         }
     }
-
 
     public void Pouring()
     {
@@ -206,7 +201,6 @@ public class GameManager : MonoBehaviour
         GameStateSelection(name);
     }
 
-
     public void GameStateSelection(string step)
     {
         switch (step)
@@ -228,14 +222,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-
     //End State
     public void EndState()
     {
         canHandleTouch = false;
     }
-
 
     public IEnumerator Enable_Touch(float sec)
     {

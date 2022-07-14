@@ -880,7 +880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295665534}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.001, y: 0.0546, z: 0}
+  m_LocalPosition: {x: -0.0001, y: 0.0595, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3947937174300253894}
@@ -2307,7 +2307,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FruitsPosition: {fileID: 1578684597}
-  canDragFruits: 1
   thisPlate: 0
   i: 0
 --- !u!1 &692373930
@@ -3029,14 +3028,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selected: 0
-  plates:
-  - {fileID: 963194225}
-  - {fileID: 1473682150}
-  - {fileID: 1217188682}
-  - {fileID: 1916753853}
-  - {fileID: 1110069406}
-  - {fileID: 690907252}
-  - {fileID: 1836324279}
 --- !u!1 &1017449725
 GameObject:
   m_ObjectHideFlags: 0
@@ -3340,7 +3331,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FruitsPosition: {fileID: 1578684597}
-  canDragFruits: 1
   thisPlate: 0
   i: 0
 --- !u!1 &1138492922
@@ -3630,7 +3620,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FruitsPosition: {fileID: 1578684597}
-  canDragFruits: 1
   thisPlate: 0
   i: 0
 --- !u!1 &1294466907
@@ -3804,7 +3793,6 @@ MonoBehaviour:
   plates: {fileID: 829703987}
   BottleCap: {fileID: 221625300}
   fruitPiecesTransformBottle: {fileID: 295665535}
-  spoon: {fileID: 0}
   plateOfPieces: {fileID: 2053186463}
   pieceParentTransform: {fileID: 1347521528}
   fruitsToCut: []
@@ -4244,7 +4232,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FruitsPosition: {fileID: 1578684597}
-  canDragFruits: 1
   thisPlate: 0
   i: 0
 --- !u!1 &1534628727
@@ -5879,7 +5866,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FruitsPosition: {fileID: 1578684597}
-  canDragFruits: 1
   thisPlate: 0
   i: 0
 --- !u!1 &1889591260
@@ -6090,7 +6076,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FruitsPosition: {fileID: 1578684597}
-  canDragFruits: 1
   thisPlate: 0
   i: 0
 --- !u!1 &1923742258
@@ -7407,8 +7392,8 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!65 &4078404272689601663
-BoxCollider:
+--- !u!136 &4078404272689601663
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -7416,9 +7401,10 @@ BoxCollider:
   m_GameObject: {fileID: 4078404272689601662}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.013209031, y: 0.08554599, z: 0.015041723}
+  m_Enabled: 1
+  m_Radius: 0.0075208615
+  m_Height: 0.08554599
+  m_Direction: 1
   m_Center: {x: -0.0012033866, y: -0.011164753, z: 0}
 --- !u!4 &4141845300712364868
 Transform:

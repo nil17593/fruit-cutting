@@ -167,6 +167,7 @@ public class GameManager : MonoBehaviour
                 fruitPieces[piecesCount].transform.SetParent(IceContainer.transform);
                 piecesInBottle.Add(fruitPieces[piecesCount]);
                 fruitPieces.RemoveAt(piecesCount);
+                UIManager.instance.UpdateCountOfPieces();
             }
             piecesCount = 4;
             return;

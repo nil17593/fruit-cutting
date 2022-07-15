@@ -60,6 +60,7 @@ public class FruitSlicer : MonoBehaviour
                 SubCube.gameObject.AddComponent<Rigidbody>();
                 SubCube.gameObject.tag = "Piece";
                 GameManager.Instance.fruitPieces.Add(SubCube);
+                UIManager.instance.UpdateCountOfPieces();
                 SubCube.transform.position = pos;
                 SubCube.transform.rotation = TargetFruit.transform.rotation;
                 SubCube.transform.SetParent(ParentTransform);

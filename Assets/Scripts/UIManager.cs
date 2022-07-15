@@ -24,6 +24,7 @@ public class UIManager : MonoBehaviour
         ScrollPanel.DOAnchorPos(new Vector2(0f, -300f), 1f);
     }
 
+    //called from GameManager and FruitSlicer
     public void UpdateCountOfPieces()
     {
         pieceCountText.text = GameManager.Instance.fruitPieces.Count.ToString();

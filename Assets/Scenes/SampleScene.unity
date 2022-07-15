@@ -123,6 +123,50 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &18632641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 18632642}
+  - component: {fileID: 18632643}
+  m_Layer: 0
+  m_Name: FruitsPosition (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &18632642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18632641}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.045, y: 6.521, z: -0.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 672293640}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &18632643
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18632641}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &38246613
 GameObject:
   m_ObjectHideFlags: 0
@@ -1756,6 +1800,50 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &523185119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 523185120}
+  - component: {fileID: 523185121}
+  m_Layer: 0
+  m_Name: FruitsPosition (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &523185120
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523185119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.155, y: 6.521, z: -0.48}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 672293640}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &523185121
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 523185119}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &565536260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2161,6 +2249,9 @@ Transform:
   - {fileID: 1354187392}
   - {fileID: 685071293}
   - {fileID: 1578684597}
+  - {fileID: 1697698209}
+  - {fileID: 523185120}
+  - {fileID: 18632642}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -40, z: 0}
@@ -2307,9 +2398,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db02c109ba7e17644833c8f3591e067a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FruitsPosition: {fileID: 1578684597}
+  FruitsPosition:
+  - {fileID: 1578684597}
+  - {fileID: 1697698209}
+  - {fileID: 523185120}
+  - {fileID: 18632642}
   thisPlate: 0
   i: 0
+  fruitPos: 0
 --- !u!1 &692373930
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,9 +3661,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db02c109ba7e17644833c8f3591e067a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FruitsPosition: {fileID: 1578684597}
+  FruitsPosition:
+  - {fileID: 1578684597}
+  - {fileID: 1697698209}
+  - {fileID: 523185120}
+  - {fileID: 18632642}
   thisPlate: 0
   i: 0
+  fruitPos: 0
 --- !u!1 &1138492922
 GameObject:
   m_ObjectHideFlags: 0
@@ -3854,9 +3955,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db02c109ba7e17644833c8f3591e067a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FruitsPosition: {fileID: 1578684597}
+  FruitsPosition:
+  - {fileID: 1578684597}
+  - {fileID: 1697698209}
+  - {fileID: 523185120}
+  - {fileID: 18632642}
   thisPlate: 0
   i: 0
+  fruitPos: 0
 --- !u!1 &1274962767
 GameObject:
   m_ObjectHideFlags: 0
@@ -4542,9 +4648,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db02c109ba7e17644833c8f3591e067a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FruitsPosition: {fileID: 1578684597}
+  FruitsPosition:
+  - {fileID: 1578684597}
+  - {fileID: 1697698209}
+  - {fileID: 523185120}
+  - {fileID: 18632642}
   thisPlate: 0
   i: 0
+  fruitPos: 0
 --- !u!1 &1534628727
 GameObject:
   m_ObjectHideFlags: 0
@@ -4730,13 +4841,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578684596}
-  m_LocalRotation: {x: 0, y: 0.1128564, z: 0, w: 0.9936113}
-  m_LocalPosition: {x: 0.02, y: 6.521, z: -0.308}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.155, y: 6.521, z: -0.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 672293640}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 12.96, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1578684598
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4745,11 +4856,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578684596}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.5499426, y: 0.11364132, z: 0.21051152}
-  m_Center: {x: -0.05629464, y: -0.06348853, z: -0.10046627}
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1582060106
 GameObject:
   m_ObjectHideFlags: 0
@@ -5236,7 +5347,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642191967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.0145, z: 0.013}
+  m_LocalPosition: {x: 0, y: -0.0145, z: 0.0115}
   m_LocalScale: {x: 0.055301, y: 0.1, z: 0.0061725}
   m_Children: []
   m_Father: {fileID: 3947937174300253894}
@@ -5304,6 +5415,50 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1642191967}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1697698208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1697698209}
+  - component: {fileID: 1697698210}
+  m_Layer: 0
+  m_Name: FruitsPosition (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1697698209
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697698208}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.064, y: 6.521, z: -0.319}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 672293640}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1697698210
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1697698208}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1708425156
 GameObject:
   m_ObjectHideFlags: 0
@@ -5711,7 +5866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1735764462}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.0001, y: -0.0145, z: -0.0139}
+  m_LocalPosition: {x: 0.0001, y: -0.0145, z: -0.011}
   m_LocalScale: {x: 0.055301, y: 0.1, z: 0.0061725}
   m_Children: []
   m_Father: {fileID: 3947937174300253894}
@@ -6176,9 +6331,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db02c109ba7e17644833c8f3591e067a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FruitsPosition: {fileID: 1578684597}
+  FruitsPosition:
+  - {fileID: 1578684597}
+  - {fileID: 1697698209}
+  - {fileID: 523185120}
+  - {fileID: 18632642}
   thisPlate: 0
   i: 0
+  fruitPos: 0
 --- !u!1 &1889591260
 GameObject:
   m_ObjectHideFlags: 0
@@ -6386,9 +6546,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db02c109ba7e17644833c8f3591e067a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FruitsPosition: {fileID: 1578684597}
+  FruitsPosition:
+  - {fileID: 1578684597}
+  - {fileID: 1697698209}
+  - {fileID: 523185120}
+  - {fileID: 18632642}
   thisPlate: 0
   i: 0
+  fruitPos: 0
 --- !u!1 &1923742258
 GameObject:
   m_ObjectHideFlags: 0

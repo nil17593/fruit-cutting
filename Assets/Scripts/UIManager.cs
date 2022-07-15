@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     public RectTransform ScrollPanel;
     [Tooltip("Text Under the PLATEOFPIECES Gameobject")]
     public TextMeshProUGUI pieceCountText;
+    public RectTransform tapPanel;
 
     public static UIManager instance;
 

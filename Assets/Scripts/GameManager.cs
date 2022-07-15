@@ -94,9 +94,9 @@ public class GameManager : MonoBehaviour
     //Swipemanager Swipe Down Event
     public void CutFruits()
     {
-        candragFruits = false;
         if (fruitsToCut.Count >= 4)
         {
+            candragFruits = false;
             count += 1;
             slicerBlade.transform.DOLocalRotate(new Vector3(0, slicerBlade.transform.rotation.y, slicerBlade.transform.rotation.z), 1f);
             foreach (GameObject fruit in fruitsToCut)
@@ -185,6 +185,7 @@ public class GameManager : MonoBehaviour
         presentGameState = GameState.IceContainerSelection;
         IceContainer.SetActive(true);
         EnablePlates();
+        StartCoroutine(NextStep("Slicing"));
     }
 
     void EnablePlates()

@@ -6,6 +6,7 @@ public class ObjectClicker : MonoBehaviour
 {
     public bool selected;
     private GameObject selectedPlate;
+
     private void Update()
     {
         if (!Input.GetMouseButtonDown(0))

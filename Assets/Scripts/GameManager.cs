@@ -6,13 +6,13 @@ using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 {
-    public enum GameState { IceContainerSelection, Slicing, Pour, Freezing, };
+    public enum GameState { IceContainerSelection, Slicing, Pour, ShakeBottle, Freezing,};
     [Header("ENUM")]
     public GameState presentGameState;
 
     [Header("FILLBAR SETTINGS")]
     public Image ProgressFillingBar;
-    public float TimeforProgress;
+    public float Timeforfreez = 5f;
     public float multiplyVal;
 
     [Header("BOOLS")]
@@ -38,6 +38,7 @@ public class GameManager : MonoBehaviour
     public GameObject Freez;
     public GameObject freezDrawer;
     public Transform freezTransform;
+    public Transform bottleTransform;
     //public int i = 0;
 
     [Header("LISTS for Sliced Fruits")]
@@ -56,6 +57,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        IceContainer.GetComponent<BottleController>().enabled = false;
         fruitPos = 0;
         selectPlates = false;
         candragFruits = true;
@@ -68,10 +70,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        //if (canProgress)
-        //{
-                
-        //}
         if (presentGameState == GameState.IceContainerSelection)
         {
             multiplyVal = 1f;
@@ -88,20 +86,22 @@ public class GameManager : MonoBehaviour
 
         if (presentGameState == GameState.Freezing)
         {
-            //multiplyVal = 5f;
+            multiplyVal = 2f;
+        }
+        if (presentGameState == GameState.ShakeBottle)
+        {
+            if (ProgressFillingBar.fillAmount >= 1f)
+            {
+                IceContainer.GetComponent<BottleController>().enabled = false;
+                IceContainer.transform.rotation = Quaternion.identity;
+                IceContainer.transform.DOLocalMove(bottleTransform.position, 0.5f).OnComplete(() =>
+                {
+                    StartCoroutine(NextStep("Freezing"));
+                });
+                
+            }
         }
 
-        //if (canHandleTouch)
-        //{
-        //    if (Input.GetMouseButton(0))
-        //    {
-        //        canProgress = true;
-        //    }
-        //    if (Input.GetMouseButtonUp(0))
-        //    {
-        //        canProgress = false;
-        //    }
-        //}
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -111,23 +111,26 @@ public class GameManager : MonoBehaviour
                 {
                     PutPiecesInBottle();
                 }
-            }
-            
+            }            
         }
-        if (!Input.GetMouseButton(0))
-        {
-            return;
-        }
-        else
+
+        if (Input.GetMouseButton(0))
         {
             if (presentGameState == GameState.Freezing)
             {
-                if (canFreez)
+                if (canFreez && Timeforfreez > 0)
                 {
-                    StartCoroutine(Freezing(ProgressFillingBar,5f));
+                    Timeforfreez -= Time.deltaTime;
+                    ProgressFillingBar.fillAmount += 0.4f / multiplyVal * Time.deltaTime;
                 }
+                //if (Timeforfreez <= 0)
+                //{
+                //    StartCoroutine(NextStep("Final"));
+                //}
+               
             }
         }
+
     }
 
     #region Slicing
@@ -215,7 +218,7 @@ public class GameManager : MonoBehaviour
             piece.transform.localScale = new Vector3(0.02f, 0.02f, 0.02f);
         }
         plates.DOAnchorPos(new Vector3(8.8f, 10.57f, -4.28f), 2f);
-        IceContainer.transform.DOLocalMove(new Vector3(0f, 11.65f, -1.5f), 2f);
+        IceContainer.transform.DOLocalMove(bottleTransform.position, 2f);
 
         plateOfPieces.transform.DOLocalMove(new Vector3(0.1f, 10.47f, -3.87f), 2f).OnComplete(() =>
         {
@@ -244,20 +247,17 @@ public class GameManager : MonoBehaviour
             presentGameState = GameState.Freezing;
             BottleCap.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 1f);
             plateOfPieces.transform.DOLocalMoveX(-6f, 1f);
-            StartCoroutine(NextStep("Freezing"));
+            IceContainer.GetComponent<BottleController>().enabled = true;
+            StartCoroutine(NextStep("ShakeBottle"));
         }
     }
-
     #endregion
-
-
-   
 
     #region IceContainerSelecetion
     public void EnableIceContainer()
     {
         presentGameState = GameState.IceContainerSelection;
-        ProgressFillingBar.fillAmount += 100f * Time.deltaTime;/// multiplyVal;// *Time.deltaTime;
+        ProgressFillingBar.fillAmount += multiplyVal;// * Time.deltaTime;/// multiplyVal;// *Time.deltaTime;
         IceContainer.SetActive(true);
         EnablePlates();
         StartCoroutine(NextStep("Slicing"));
@@ -284,7 +284,7 @@ public class GameManager : MonoBehaviour
                         endValue: freezTransform.position,
                         jumpPower: 1,
                         numJumps: 1,
-                        duration: 2f).SetEase(Ease.InOutSine).OnComplete(() =>
+                        duration: 3f).SetEase(Ease.InOutSine).OnComplete(() =>
                         {
                             IceContainer.transform.parent = freezTransform.transform;
                             IceContainer.transform.DOLocalRotate(new Vector3(90f, 180f, 0f), 1f);
@@ -298,16 +298,11 @@ public class GameManager : MonoBehaviour
         });
     }
 
-    //IEnumerator Freezing()
-    //{
-    //    float count = 10f;
-    //    while (count != 0f)
-    //    {
-    //        Debug.Log("Count" + count);
-    //        count -= Time.deltaTime; 
-    //    }
-    //    yield return null;
-    //}
+    void ShakeBottle()
+    {
+        Debug.Log(presentGameState);
+    }
+
 
     public IEnumerator NextStep(string name)
     {
@@ -331,21 +326,17 @@ public class GameManager : MonoBehaviour
                 presentGameState = GameState.Pour;
                 Pouring();
                 break;
+            case "ShakeBottle":
+                presentGameState = GameState.ShakeBottle;
+                ProgressFillingBar.fillAmount = 0.0f;
+                ShakeBottle();
+                break;
             case "Freezing":
                 ProgressFillingBar.fillAmount = 0.0f;
+                presentGameState = GameState.Freezing;
                 PutBottleInFreez();
                 break;
-        }
-    }
-
-    IEnumerator Freezing(Image image, float duration)
-    {
-        float time = 0.0f;
-        while (time < duration)
-        {
-            image.fillAmount = time / Mathf.Max(duration, 0.1f);
-            time += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+           
         }
     }
 

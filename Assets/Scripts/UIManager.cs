@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     public Image iceContainerSelection;
     public Image slicing;
     public Image pouring;
+    public Image shaking;
     public Image freezing;
 
     public static UIManager instance;
@@ -43,10 +44,15 @@ public class UIManager : MonoBehaviour
             DoScaleImage(pouring);
             DoScaleDownImage(slicing);
         }
+        if (GameManager.Instance.presentGameState == GameManager.GameState.ShakeBottle)
+        {
+            DoScaleImage(shaking);
+            DoScaleDownImage(pouring);
+        }
         if (GameManager.Instance.presentGameState == GameManager.GameState.Freezing)
         {
             DoScaleImage(freezing);
-            DoScaleDownImage(pouring);
+            DoScaleDownImage(shaking);
         }
     }
 

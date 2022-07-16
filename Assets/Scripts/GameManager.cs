@@ -84,10 +84,6 @@ public class GameManager : MonoBehaviour
             multiplyVal = 0.04f;
         }
 
-        if (presentGameState == GameState.Freezing)
-        {
-            multiplyVal = 2f;
-        }
         if (presentGameState == GameState.ShakeBottle)
         {
             if (ProgressFillingBar.fillAmount >= 1f)
@@ -96,11 +92,19 @@ public class GameManager : MonoBehaviour
                 IceContainer.transform.rotation = Quaternion.identity;
                 IceContainer.transform.DOLocalMove(bottleTransform.position, 0.5f).OnComplete(() =>
                 {
+                    //if(presentGameState==GameState.ShakeBottle)
                     StartCoroutine(NextStep("Freezing"));
                 });
-                
+
             }
         }
+
+        if (presentGameState == GameState.Freezing)
+        {
+            multiplyVal = 2f;
+        }
+
+       
 
 
         if (Input.GetMouseButtonDown(0))
@@ -244,7 +248,7 @@ public class GameManager : MonoBehaviour
         }
         if (fruitPieces.Count <= 0)
         {
-            presentGameState = GameState.Freezing;
+            presentGameState = GameState.ShakeBottle;
             BottleCap.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 1f);
             plateOfPieces.transform.DOLocalMoveX(-6f, 1f);
             IceContainer.GetComponent<BottleController>().enabled = true;

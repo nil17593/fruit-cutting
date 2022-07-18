@@ -29,70 +29,77 @@ public class BottleController : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.touchCount > 0)
+        if (!GameManager.Instance.canShake)
         {
-            touchInput = true;
-            touch = Input.GetTouch(0);
+            return;
+        }
+        else
+        {
 
-            if (touch.phase == TouchPhase.Began)
+            if (Input.touchCount > 0)
             {
+                touchInput = true;
+                touch = Input.GetTouch(0);
+
+                if (touch.phase == TouchPhase.Began)
+                {
+                    //transform.eulerAngles = new Vector3(0, 55, 0);
+                }
+
+                if (touch.phase == TouchPhase.Moved)
+                {
+                    transform.position = new Vector3(transform.position.x + (-touch.deltaPosition.x * moveSpeedTouch), transform.position.y + (touch.deltaPosition.y * moveSpeedTouch), transform.position.z);
+                    if (touch.deltaPosition.x > 0)
+                    {
+                        transform.Rotate(new Vector3(0, 0, rotateParameter));
+                        GameManager.Instance.ProgressFillingBar.fillAmount += 0.02f;
+                    }
+                    else
+                    {
+                        transform.Rotate(new Vector3(0, 0, -rotateParameter));
+                        GameManager.Instance.ProgressFillingBar.fillAmount += 0.02f;
+                    }
+                }
+            }
+            else
+            {
+                touchInput = false;
+            }
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                prevPos = Input.mousePosition;
                 //transform.eulerAngles = new Vector3(0, 55, 0);
             }
 
-            if (touch.phase == TouchPhase.Moved)
+            if (Input.GetMouseButton(0))
             {
-                transform.position = new Vector3(transform.position.x + (-touch.deltaPosition.x * moveSpeedTouch), transform.position.y + (touch.deltaPosition.y * moveSpeedTouch), transform.position.z);
-                if (touch.deltaPosition.x > 0)
+                keyInput = true;
+                transform.position = new Vector3(transform.position.x + (Input.mousePosition.x - prevPos.x) * (-moveSpeedMouse), transform.position.y + (Input.mousePosition.y - prevPos.y) * moveSpeedMouse, transform.position.z);
+
+
+                if (Input.mousePosition.x - prevPos.x > 0)
                 {
                     transform.Rotate(new Vector3(0, 0, rotateParameter));
                     GameManager.Instance.ProgressFillingBar.fillAmount += 0.02f;
                 }
-                else
+                else if (Input.mousePosition.x - prevPos.x < 0)
                 {
                     transform.Rotate(new Vector3(0, 0, -rotateParameter));
                     GameManager.Instance.ProgressFillingBar.fillAmount += 0.02f;
                 }
+                prevPos = Input.mousePosition;
             }
-        }
-        else
-        {
-            touchInput = false;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            prevPos = Input.mousePosition;
-            //transform.eulerAngles = new Vector3(0, 55, 0);
-        }
-
-        if (Input.GetMouseButton(0))
-        {
-            keyInput = true;
-            transform.position = new Vector3(transform.position.x + (Input.mousePosition.x - prevPos.x) * (-moveSpeedMouse), transform.position.y + (Input.mousePosition.y - prevPos.y) * moveSpeedMouse, transform.position.z);
-
-
-            if (Input.mousePosition.x - prevPos.x > 0)
+            else
             {
-                transform.Rotate(new Vector3(0, 0, rotateParameter));
-                GameManager.Instance.ProgressFillingBar.fillAmount += 0.02f;
+                keyInput = false;
             }
-            else if (Input.mousePosition.x - prevPos.x < 0)
-            {
-                transform.Rotate(new Vector3(0, 0, -rotateParameter));
-                GameManager.Instance.ProgressFillingBar.fillAmount += 0.02f;
-            }
-            prevPos = Input.mousePosition;
-        }
-        else
-        {
-            keyInput = false;
-        }
 
-        if (keyInput == false && touchInput == false)
-        {
-            transform.position = initPosition;
-            transform.rotation = initRotation;
+            if (keyInput == false && touchInput == false)
+            {
+                transform.position = initPosition;
+                transform.rotation = initRotation;
+            }
         }
     }
 }

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public bool candragFruits;
     public bool selectPlates;
     public bool canFreez;
+    public bool canShake;
 
     [Header("GAMEOBJECTS")]
     public GameObject IceContainer;
@@ -35,9 +36,9 @@ public class GameManager : MonoBehaviour
     public Transform fruitPiecesTransformBottle;
     public GameObject plateOfPieces;
     public Transform pieceParentTransform;
-    public GameObject Freez;
-    public GameObject freezDrawer;
-    public Transform freezTransform;
+    public GameObject refrigerator;
+    public GameObject refrigeratorDrawer;
+    public Transform refrigeratorTransform;
     public Transform bottleTransform;
     //public int i = 0;
 
@@ -58,6 +59,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         IceContainer.GetComponent<BottleController>().enabled = false;
+        canShake = false;
         fruitPos = 0;
         selectPlates = false;
         candragFruits = true;
@@ -82,12 +84,20 @@ public class GameManager : MonoBehaviour
         if (presentGameState == GameState.Pour)
         {
             multiplyVal = 0.04f;
+            if (fruitPieces.Count <= 0)
+            {
+                canPour = false;
+                BottleCap.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 1f);
+                StartCoroutine(NextStep("ShakeBottle"));
+                canShake = true;
+            } 
         }
 
         if (presentGameState == GameState.ShakeBottle)
         {
             if (ProgressFillingBar.fillAmount >= 1f)
             {
+                canShake = false;
                 IceContainer.GetComponent<BottleController>().enabled = false;
                 IceContainer.transform.rotation = Quaternion.identity;
                 IceContainer.transform.DOLocalMove(bottleTransform.position, 0.5f).OnComplete(() =>
@@ -95,7 +105,6 @@ public class GameManager : MonoBehaviour
                     //if(presentGameState==GameState.ShakeBottle)
                     StartCoroutine(NextStep("Freezing"));
                 });
-
             }
         }
 
@@ -126,15 +135,9 @@ public class GameManager : MonoBehaviour
                 {
                     Timeforfreez -= Time.deltaTime;
                     ProgressFillingBar.fillAmount += 0.4f / multiplyVal * Time.deltaTime;
-                }
-                //if (Timeforfreez <= 0)
-                //{
-                //    StartCoroutine(NextStep("Final"));
-                //}
-               
+                } 
             }
         }
-
     }
 
     #region Slicing
@@ -190,8 +193,7 @@ public class GameManager : MonoBehaviour
             {
                 FruitSlicer.instance.onlyOnce = true;
                 candragFruits = true;
-            }
-            );
+            });
         }
     }
 
@@ -226,6 +228,7 @@ public class GameManager : MonoBehaviour
 
         plateOfPieces.transform.DOLocalMove(new Vector3(0.1f, 10.47f, -3.87f), 2f).OnComplete(() =>
         {
+            DOTween.Kill(plateOfPieces);
             canPour = true;
         });
     }
@@ -246,14 +249,12 @@ public class GameManager : MonoBehaviour
             piecesCount = 4;
             return;
         }
-        if (fruitPieces.Count <= 0)
-        {
-            presentGameState = GameState.ShakeBottle;
-            BottleCap.transform.DOLocalRotate(new Vector3(0f, 0f, 0f), 1f);
-            plateOfPieces.transform.DOLocalMoveX(-6f, 1f);
-            IceContainer.GetComponent<BottleController>().enabled = true;
-            StartCoroutine(NextStep("ShakeBottle"));
-        }
+        //if (fruitPieces.Count <= 0)
+        //{
+        //    canPour = false;
+        //    presentGameState = GameState.ShakeBottle;
+            
+        //}
     }
     #endregion
 
@@ -278,32 +279,46 @@ public class GameManager : MonoBehaviour
 
     void PutBottleInFreez()
     {
-        Freez.transform.DOLocalMove(new Vector3(-1.29f, 10.89f, -2.21f), 0.5f).OnComplete(() =>
+        //Sequence freezingSequense = DOTween.Sequence();
+        //freezingSequense.Append(refrigerator.transform.DOMove(new Vector3(-1.29f, 10.89f, -2.21f), 0.5f));
+        //freezingSequense.Append(refrigeratorDrawer.transform.DOLocalMove(new Vector3(0f, -0.08f, -0.873f), 0.5f));
+        //freezingSequense.Append(IceContainer.transform.DOJump
+        //            (
+        //                endValue: refrigeratorTransform.position,
+        //                jumpPower: 1,
+        //                numJumps: 1,
+        //                duration: 3f).SetEase(Ease.InOutSine));
+        //IceContainer.transform.parent = refrigeratorTransform.transform;
+        //IceContainer.transform.DOLocalRotate(new Vector3(90f, 180f, 0f), 1f);
+        //freezingSequense.Append(refrigeratorDrawer.transform.DOLocalMove(new Vector3(0f, -0.08f, 0.024f), 1f));
+        //canFreez = true;
+        //IceContainer.transform.DOBlendableLocalMoveBy(Freez.transform.position, 2f);
+        refrigerator.SetActive(true);
+        refrigeratorDrawer.transform.DOLocalMove(new Vector3(0f, -0.08f, -0.873f), 0.5f).OnComplete(() =>
         {
-            //IceContainer.transform.DOBlendableLocalMoveBy(Freez.transform.position, 2f);
-            freezDrawer.transform.DOLocalMove(new Vector3(0f, -0.08f, -0.873f), 0.5f).OnComplete(() =>
-            {
-                IceContainer.transform.DOJump
-                    (
-                        endValue: freezTransform.position,
-                        jumpPower: 1,
-                        numJumps: 1,
-                        duration: 3f).SetEase(Ease.InOutSine).OnComplete(() =>
+            IceContainer.transform.DOJump
+                (
+                    endValue: refrigeratorTransform.position,
+                    jumpPower: 1,
+                    numJumps: 1,
+                    duration: 1f).SetEase(Ease.InOutSine).OnComplete(() =>
+                    {
+                        IceContainer.transform.parent = refrigeratorTransform.transform;
+                        IceContainer.transform.DOLocalRotate(new Vector3(90f, 180f, 0f), 1f).OnComplete(() =>
                         {
-                            IceContainer.transform.parent = freezTransform.transform;
-                            IceContainer.transform.DOLocalRotate(new Vector3(90f, 180f, 0f), 1f);
-
-                            freezDrawer.transform.DOLocalMove(new Vector3(0f, -0.08f, 0.024f), 1f).OnComplete(() =>
+                            refrigeratorDrawer.transform.DOLocalMove(new Vector3(0f, -0.08f, 0.024f), 1f).OnComplete(() =>
                             {
                                 canFreez = true;
                             });
                         });
-            });
+                    });
         });
     }
 
     void ShakeBottle()
     {
+        plateOfPieces.transform.DOLocalMoveX(-6f, 1f);
+        IceContainer.GetComponent<BottleController>().enabled = true;
         Debug.Log(presentGameState);
     }
 
